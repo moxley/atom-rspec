@@ -82,11 +82,8 @@ class RSpecView extends ScrollView
 
   addOutput: (output) =>
     @spinner.hide()
-    escapedOutput = ''
-    lines = "#{output}".split(/\r\n|\r|\n/)
-    for line in lines
+    for line in "#{output}".split(/\r\n|\r|\n/)
       div = document.createElement('div')
-      line = line.trim()
       div.innerText = line
       escapedLine = div.innerHTML
 
