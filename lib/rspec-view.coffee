@@ -81,8 +81,7 @@ class RSpecView extends ScrollView
     terminal.stdin.write("exit\n")
 
   addOutput: (output) =>
-
-    output = "#{output}"
+    output = @escape("#{output}")
     output = output.replace /([^\s]*:[0-9]+)/g, (match) =>
       file = match.split(":")[0]
       line = match.split(":")[1]
@@ -91,6 +90,11 @@ class RSpecView extends ScrollView
     @spinner.hide()
     @output.append("#{output}")
     @scrollTop(@[0].scrollHeight)
+
+  escape: (str) =>
+    div = document.createElement('div')
+    div.innerText = str
+    div.innerHTML
 
   onStdOut: (data) =>
     @addOutput data
